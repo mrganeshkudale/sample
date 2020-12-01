@@ -1,5 +1,5 @@
 pipeline {
-    agent docker
+    agent { dockerfile true}
     stages {
         stage('reference-pipeline') {
             steps {
