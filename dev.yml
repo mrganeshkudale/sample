@@ -29,23 +29,3 @@ spec:
     - protocol: TCP
       port: 80
       targetPort: 80
-
----
----
-apiVersion: networking.k8s.io/v1beta1
-kind: Ingress
-metadata:
-  name: sample-ingress
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
-spec:
-  backend:
-    serviceName: sample-service
-    servicePort: 80
-  rules:
-  - http:
-      paths:
-      - path: /
-        backend:
-          serviceName: sample-service
-          servicePort: 80
