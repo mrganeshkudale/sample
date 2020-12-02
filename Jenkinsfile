@@ -8,7 +8,7 @@ pipeline {
 	       sh "CODE=`az login --use-device-code`"
                sh "az acr build -r tntaksreg -t myngnix ."
                sh "az account set --subscription aafef7b4-6886-45b4-afeb-2556fc54b425"
-               sh "az aks get-credentials --resource-group atos-tra-pla-rg --name tnt-pla-aks-cluster"
+               sh "az aks get-credentials --resource-group atos-tra-pla-rg --name atos-tra-pla-cluster"
                sh "kubectl apply -f development.yml"
             }
         }
