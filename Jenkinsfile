@@ -26,7 +26,7 @@ pipeline {
 		}
 		stage('Deploy'){
 			steps {
-				sh "kubectl apply -f ${DEPLOY_ENV}.yml"		
+				sh "kubectl apply -f ${DEPLOY_ENV}.yml --namespace=${DEPLOY_ENV}"		
 			}
 		}
     	}
