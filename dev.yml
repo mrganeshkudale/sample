@@ -3,7 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: sample-deployment
-  namespace: dev
+  namespace: petclinic
 spec:
   selector:
     matchLabels:
