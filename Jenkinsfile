@@ -1,4 +1,3 @@
-// Sample Text
 pipeline {
 	environment {
     		def APP_NAME = "sample"
