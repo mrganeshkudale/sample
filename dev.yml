@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: pods-sample-deployment
-        image: tntaksreg.azurecr.io/sample:latest
+        image: tntaksreg.azurecr.io/sample
 ---
 apiVersion: v1
 kind: Service
