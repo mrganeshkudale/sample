@@ -1,2 +1,2 @@
 FROM docker.io/nginx:latest
-# Testing
+COPY index.html /usr/share/nginx/html
