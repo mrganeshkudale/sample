@@ -26,6 +26,7 @@ pipeline {
 		}
 		stage('Deploy'){
 			steps {
+				sh "kubectl delete deployment ${APP_NAME}-service --namespace=${DEPLOY_ENV}"
 				sh "kubectl apply -f ${DEPLOY_ENV}.yml --namespace=${DEPLOY_ENV}"
 			}
 		}
