@@ -1,60 +1,50 @@
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: petclinic
-
 ---
-
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: APP_NAME-deployment
+  namespace: dev
+spec:
+  selector:
+    matchLabels:
+      app: APP_NAME-deployment
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: APP_NAME-deployment
+    spec:
+      containers:
+      - name: pods-APP_NAME-deployment
+        image: tntaksreg.azurecr.io/APP_NAME
+        imagePullPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: APP_NAME-service
+    namespace: dev
+spec:
+  selector:
+    app: APP_NAME-deployment
+  type: ClusterIP
+  ports:
+    - protocol: TCP
+      port: 80
+---
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
-  name: petclinic-ingress
+  name: APP_NAME-ingress
+  namespace: dev
   annotations:
     kubernetes.io/ingress.class: addon-http-application-routing
 spec:
   rules:
-  - host: petclinic.e46708b92c054086909b.eastus.aksapp.io
+  - host: APP_NAME.e46708b92c054086909b.eastus.aksapp.io
     http:
       paths:
       - backend:
-          serviceName: petclinic-service
+          serviceName: APP_NAME-service
           servicePort: 80
         path: /
-
----
-
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: petclinic
-  namespace: petclinic
-spec:
-  replicas: 2
-  selector:
-    matchLabels:
-      app: petclinic
-  template:
-    metadata:
-      labels:
-        app: petclinic
-    spec:
-      containers:
-      - name: petclinic-pods
-        image: docker.io/arey/springboot-petclinic:latest
-        ports:
-        - containerPort: 8080
----
-
-apiVersion: v1
-kind: Service
-metadata:
-  name: petclinic-service
-  namespace: petclinic
-spec:
-  ports:
-  - port: 80
-    targetPort: 8080
-    protocol: TCP
-    name: http
-  selector:
-    app: petclinic
