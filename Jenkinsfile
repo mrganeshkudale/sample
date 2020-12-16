@@ -1,6 +1,6 @@
 pipeline {
 	environment {
-    		def APP_NAME = "sample"
+    		def APP_NAME = "monitor"
     		def GIT_REPO_NAME = "mrganeshkudale"
     		def DEPLOY_ENV = "dev"
 	}
@@ -9,7 +9,7 @@ pipeline {
 		stage('Code Checkout') {
 			steps {
 				sh "if [ -d ${APP_NAME} ]; then rm -rf ${APP_NAME}; fi"
-				sh "git clone https://github.com/${GIT_REPO_NAME}/${APP_NAME}.git"
+				sh "git clone https://github.com/${GIT_REPO_NAME}/sample.git"
 			}
 		}
 		stage('Azure Cloud Connect'){
