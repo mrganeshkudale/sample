@@ -1,6 +1,6 @@
 pipeline {
 	environment {
-    		def APP_NAME = "monitor"
+    		def APP_NAME = "sample"
     		def GIT_REPO_NAME = "mrganeshkudale"
     		def DEPLOY_ENV = "dev"
 	}
@@ -9,7 +9,7 @@ pipeline {
 		stage('Code Checkout') {
 			steps {
 				sh "if [ -d ${APP_NAME} ]; then rm -rf ${APP_NAME}; fi"
-				sh "git clone https://github.com/${GIT_REPO_NAME}/sample.git"
+				sh "git clone https://github.com/${GIT_REPO_NAME}/${APP_NAME}.git"
 			}
 		}
 		stage('Azure Cloud Connect'){
@@ -33,7 +33,7 @@ pipeline {
     	}
 	post { 
 		success { 
-		    echo "Your application URL will be - http://${APP_NAME}.e46708b92c054086909b.eastus.aksapp.io"
+		    echo "Your application URL will be - http://monitor.e46708b92c054086909b.eastus.aksapp.io"
 		}
 		failure { 
 		    echo "Please check logs for more details."
