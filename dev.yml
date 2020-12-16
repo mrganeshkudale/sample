@@ -2,31 +2,31 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: sample-deployment
+  name: monitor-deployment
   namespace: dev
 spec:
   selector:
     matchLabels:
-      app: sample-deployment
-  replicas: 2
+      app: monitor-deployment
+  replicas: 1
   template:
     metadata:
       labels:
-        app: sample-deployment
+        app: monitor-deployment
     spec:
       containers:
-      - name: pods-sample-deployment
-        image: tntaksreg.azurecr.io/sample
+      - name: pods-monitor-deployment
+        image: docker.io/prom/prometheus
         imagePullPolicy: Always
 ---
 apiVersion: v1
 kind: Service
 metadata:
-    name: sample-service
+    name: monitor-service
     namespace: dev
 spec:
   selector:
-    app: sample-deployment
+    app: monitor-deployment
   type: ClusterIP
   ports:
     - protocol: TCP
@@ -35,16 +35,16 @@ spec:
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
-  name: sample-ingress
+  name: monitor-ingress
   namespace: dev
   annotations:
     kubernetes.io/ingress.class: addon-http-application-routing
 spec:
   rules:
-  - host: sample.e46708b92c054086909b.eastus.aksapp.io
+  - host: monitor.e46708b92c054086909b.eastus.aksapp.io
     http:
       paths:
       - backend:
-          serviceName: sample-service
+          serviceName: monitor-service
           servicePort: 80
         path: /
