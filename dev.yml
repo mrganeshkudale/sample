@@ -51,7 +51,3 @@ spec:
           serviceName: monitor-service
           servicePort: 80
         path: /
-status:
-  loadBalancer:
-    ingress:
-      - ip: 20.62.242.58
