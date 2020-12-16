@@ -1,6 +1,6 @@
 pipeline {
 	environment {
-    		def APP_NAME = "sample"
+    		def APP_NAME = "monitor"
     		def GIT_REPO_NAME = "mrganeshkudale"
     		def DEPLOY_ENV = "dev"
 	}
@@ -19,14 +19,14 @@ pipeline {
 				sh "az aks get-credentials --resource-group atos-tra-pla-rg --name atos-tra-pla-cluster"			
 			}
 		}
-		stage('Build & Image'){
+		/*stage('Build & Image'){
 			steps {
 				sh "az acr build -r tntaksreg -t ${APP_NAME} ."			
 			}
-		}
+		}*/
 		stage('Deploy'){
 			steps {
-				sh "kubectl delete deployment ${APP_NAME}-deployment --namespace=${DEPLOY_ENV}"
+				//sh "kubectl delete deployment ${APP_NAME}-deployment --namespace=${DEPLOY_ENV}"
 				sh "kubectl apply -f ${DEPLOY_ENV}.yml --namespace=${DEPLOY_ENV}"
 			}
 		}
