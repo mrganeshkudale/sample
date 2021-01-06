@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: pods-sample-deployment
-        image: tntaksreg.azurecr.io/sample
+        image: tntaksreg.azurecr.io/sample:latest
         imagePullPolicy: Always
 ---
 apiVersion: v1
